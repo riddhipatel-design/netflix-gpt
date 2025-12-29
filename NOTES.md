@@ -2,6 +2,9 @@
 
 - Create React App
 - Configured TailwindCss
+- Header
+- Login form
+- Signup Form
 
 #Features
 - Login/Sign up
@@ -17,3 +20,9 @@
 -NetflixGPT
     - Search Bar
     - Movie Suggestions
+
+
+   - to setup routing (e.g. http://localhost:3000/browse), 
+        -install react router dom
+        -create routing by createBrowserRouter and declare path & element for routing
+        -import RouterProvider for reactrouterDom
