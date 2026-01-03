@@ -10,6 +10,25 @@
 - useRef Hook
 - firebase setup
 - create SignUp User Account
+- Implement Sign In user Api
+- install react-redux
+- install redux toolkit
+- created Redux store with userSlice
+- Implemented Sign out
+- update profile
+- Unscribed to the onAuthStateChanged Callback
+- Add hardcoded values to the constants file
+- Register TMDB API & create an app & get access token 
+- Get Data from TMDB now playing movies list API
+- Custom Hook for Now Playin movies
+- Create movieSlice
+- Update Store with movie Dtat
+- Planing for Maincontainer & secondary Container
+- Fetch Data for Trailer video
+- Update Store with Trailer video Data 
+- Embeded the Youtube video and make it autoplay and mute 
+
+
 
 #Features
 - Login/Sign up
