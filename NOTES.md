@@ -27,7 +27,7 @@
 - Fetch Data for Trailer video
 - Update Store with Trailer video Data 
 - Embeded the Youtube video and make it autoplay and mute 
-
+- Build Secondary Container
 
 
 #Features
@@ -40,7 +40,11 @@
         - Tailer in Background
         - Title and Description
         - Movie Suggestions
-            - Movie list * N
+            - MovieList - Populer
+                - MovieCard * n
+            - MovieList - now playing
+            - MovieList - trending 
+               
 -NetflixGPT
     - Search Bar
     - Movie Suggestions
