@@ -9,8 +9,9 @@ import {
 import { auth } from "../utils/firebase";
 import { getFirebaseAuthErrorMessage } from "../utils/firebaseErrors";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice"
-
+import { addUser } from "../utils/userSlice";
+import { useSelector } from "react-redux";
+import lang from "../utils/languageConstants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -20,6 +21,7 @@ const Login = () => {
   const password = useRef(null);
   const name = useRef(null);
 
+  const langKey = useSelector((store) => store.config.lang);
 
   const dispatch = useDispatch();
 
@@ -45,16 +47,17 @@ const Login = () => {
           const user = userCredential.user;
           console.log(user);
           return updateProfile(user, {
-      displayName: name.current.value.trim(),
-    });
-    })
-            .then(() => {
-              // Profile updated!
-               const {uid, email, displayName} = auth.currentUser;
-                  dispatch(addUser({ uid: uid, email: email, displayName: displayName })); 
-              
-            })
-           
+            displayName: name.current.value.trim(),
+          });
+        })
+        .then(() => {
+          // Profile updated!
+          const { uid, email, displayName } = auth.currentUser;
+          dispatch(
+            addUser({ uid: uid, email: email, displayName: displayName })
+          );
+        })
+
         .catch((error) => {
           setErrorMessage(getFirebaseAuthErrorMessage(error.code, false));
         });
@@ -68,7 +71,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-         
         })
         .catch((error) => {
           setErrorMessage(getFirebaseAuthErrorMessage(error.code, true));
@@ -99,27 +101,28 @@ const Login = () => {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-6 bg-black/75 py-14 px-16 rounded text-white"
           >
             <h1 className="font-bold text-3xl pb-4">
-              {isSignInForm ? "Sign In" : "Sign Up"}
+              {isSignInForm ? lang[langKey].signIn : lang[langKey].signUp}
             </h1>
             {!isSignInForm && (
               <input
                 ref={name}
                 type="text"
-                placeholder="Name"
+                placeholder={lang[langKey].namePlaceholder}
                 className="p-3 mt-1 bg-gray-800 text-white rounded w-full"
               />
             )}
+
             <input
               ref={email}
               type="text"
-              placeholder="Email or phone number"
+              placeholder={lang[langKey].emailPlaceholder}
               className="p-3 mt-1 bg-gray-800 text-white rounded w-full"
             />
 
             <input
               ref={password}
               type="password"
-              placeholder="Password"
+              placeholder={lang[langKey].passwordPlaceholder}
               className="p-3 bg-gray-800 text-white rounded w-full"
             />
 
@@ -133,12 +136,32 @@ const Login = () => {
               className="p-3 bg-red-700 text-white font-semibold rounded w-full"
               onClick={handleButtonClick}
             >
-              {isSignInForm ? "Sign In" : "Sign Up"}
+              {isSignInForm ? lang[langKey].signIn : lang[langKey].signUp}
             </button>
-            <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
-              {isSignInForm
-                ? "New to Netflix? Sign Up Now"
-                : "Already registered? Sign In Now"}{" "}
+            <p className="py-4 text-gray-300">
+              {isSignInForm ? (
+                <>
+                  {lang[langKey].newToNetflix}{" "}
+                  <button
+                    type="button"
+                    onClick={toggleSignInForm}
+                    className="ml-1 text-white hover:underline"
+                  >
+                    {lang[langKey].signUp}
+                  </button>
+                </>
+              ) : (
+                <>
+                  {lang[langKey].alreadyRegistered}{" "}
+                  <button
+                    type="button"
+                    onClick={toggleSignInForm}
+                    className="ml-1 text-white hover:underline"
+                  >
+                    {lang[langKey].signIn}
+                  </button>
+                </>
+              )}
             </p>
           </form>
         </div>

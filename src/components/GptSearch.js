@@ -8,7 +8,9 @@ const GptSearch = () => {
       className="
         min-h-screen w-full
         bg-gradient-to-b
-        from-black via-zinc-900 to-black
+       from-black/90
+       via-zinc-800/90
+       to-black/90
         text-white
       "
     >
