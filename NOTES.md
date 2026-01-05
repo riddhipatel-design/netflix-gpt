@@ -27,7 +27,12 @@
 - Fetch Data for Trailer video
 - Update Store with Trailer video Data 
 - Embeded the Youtube video and make it autoplay and mute 
-- Build Secondary Container
+- Build Secondary Containe
+- Build Movie List
+- Bulid Movie Card
+- TMDB Image CDN URL
+- usePopoularMovies, nowPlaying, topRated, Upcomming Custome hooks
+- GPT Search features
 
 
 #Features
