@@ -33,6 +33,8 @@
 - TMDB Image CDN URL
 - usePopoularMovies, nowPlaying, topRated, Upcomming Custome hooks
 - GPT Search features
+- Multi-language feature in App
+- Integrate GPT APIs
 
 
 #Features
