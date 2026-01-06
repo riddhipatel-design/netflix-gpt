@@ -14,18 +14,25 @@ console.log(mainMovie);
 const {original_title, overview, id } = mainMovie;
 
   return (
-    <div className='relative w-full h-[90vh] overflow-hidden'>
-        
-         <VideoBackgroud movieId={id}/>
+  <div className="relative w-full h-[65vh] sm:h-[70vh] lg:h-[90vh] overflow-hidden">
+    
+    <VideoBackgroud movieId={id} />
 
-          {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+    {/* Gradient overlay */}
+    <div
+      className="
+        absolute inset-0
+        bg-gradient-to-r
+        from-black
+        via-black/70 sm:via-black/60
+        to-transparent
+      "
+    />
 
-        <VideoTitle title={original_title} movieOverview={overview} />
-       
+    <VideoTitle title={original_title} movieOverview={overview} />
+  </div>
+);
 
-    </div>
-  )
 }
 
 export default MainContainer
