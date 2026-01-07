@@ -8,20 +8,35 @@ const useTopRatedMovies = () => {
   const topRatedMovies = useSelector((store) => store.movies.topRatedMovies);
 
   useEffect(() => {
-    if (topRatedMovies) return; // Guard: fetch only if data not present
+    if (topRatedMovies) return; // fetch only if not already in store
 
     const getTopRatedMovies = async () => {
-      const data = await fetch(
-        "https://api.themoviedb.org/3/movie/top_rated?page=1",
-        API_OPTIONS
-      );
+      try {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/top_rated?page=1",
+          API_OPTIONS
+        );
 
-      const json = await data.json();
-      dispatch(addTopRatedMovies(json.results));
+        if (!response.ok) {
+          console.error("Failed to fetch top rated movies:", response.status);
+          return;
+        }
+
+        const json = await response.json();
+
+        if (!json.results || json.results.length === 0) {
+          console.warn("No top rated movies found");
+          return;
+        }
+
+        dispatch(addTopRatedMovies(json.results));
+      } catch (error) {
+        console.error("Error fetching top rated movies:", error);
+      }
     };
 
     getTopRatedMovies();
-  }, [topRatedMovies, dispatch]); // dependencies: Redux state & dispatch
+  }, [topRatedMovies, dispatch]);
 };
 
 export default useTopRatedMovies;

@@ -13,13 +13,28 @@ const useNowPlayingMovies = () => {
     if (nowPlayingMovies) return;
 
     const getNowPlayingMovies = async () => {
-      const data = await fetch(
-        "https://api.themoviedb.org/3/movie/now_playing?page=1",
-        API_OPTIONS
-      );
+      try {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/now_playing?page=1",
+          API_OPTIONS
+        );
 
-      const json = await data.json();
-      dispatch(addNowPlayingMovies(json.results));
+        if (!response.ok) {
+          console.error("Failed to fetch now playing movies", response.status);
+          return;
+        }
+
+        const json = await response.json();
+
+        if (!json.results || json.results.length === 0) {
+          console.warn("No now playing movies found");
+          return;
+        }
+
+        dispatch(addNowPlayingMovies(json.results));
+      } catch (err) {
+        console.error("Error fetching now playing movies:", err);
+      }
     };
 
     getNowPlayingMovies();

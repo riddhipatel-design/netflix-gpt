@@ -8,20 +8,35 @@ const useUpcomingMovies = () => {
   const upcomingMovies = useSelector((store) => store.movies.upcomingMovies);
 
   useEffect(() => {
-    if (upcomingMovies) return; // Guard: fetch only if data not present
+    if (upcomingMovies) return; // fetch only if not already in store
 
     const getUpcomingMovies = async () => {
-      const data = await fetch(
-        "https://api.themoviedb.org/3/movie/upcoming?page=1",
-        API_OPTIONS
-      );
+      try {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/upcoming?page=1",
+          API_OPTIONS
+        );
 
-      const json = await data.json();
-      dispatch(addUpcomingMovies(json.results));
+        if (!response.ok) {
+          console.error("Failed to fetch upcoming movies:", response.status);
+          return;
+        }
+
+        const json = await response.json();
+
+        if (!json.results || json.results.length === 0) {
+          console.warn("No upcoming movies found");
+          return;
+        }
+
+        dispatch(addUpcomingMovies(json.results));
+      } catch (error) {
+        console.error("Error fetching upcoming movies:", error);
+      }
     };
 
     getUpcomingMovies();
-  }, [upcomingMovies, dispatch]); // dependencies: Redux state & dispatch
+  }, [upcomingMovies, dispatch]);
 };
 
 export default useUpcomingMovies;

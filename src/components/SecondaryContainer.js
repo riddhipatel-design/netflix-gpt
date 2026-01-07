@@ -11,13 +11,18 @@ const SecondaryContainer = () => {
     
       {/* Rows pulled into hero */}
       <div className="relative -mt-24 sm:-mt-40 z-20">
+         {movies.nowPlayingMovies?.length > 0 && (
           <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
+        )}
+        {movies.popularMovies?.length > 0 && (
           <MovieList title={"Popular"} movies={movies.popularMovies} />
+        )}
+        {movies.topRatedMovies?.length > 0 && (
           <MovieList title={"Top Rated"} movies={movies.topRatedMovies} />
-          <MovieList
-            title={"Upcoming"}
-            movies={movies.upcomingMovies}
-          />
+        )}
+        {movies.upcomingMovies?.length > 0 && (
+          <MovieList title={"Upcoming"} movies={movies.upcomingMovies} />
+        )}
 
         </div>
       </div>

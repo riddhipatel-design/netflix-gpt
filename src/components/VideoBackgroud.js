@@ -5,7 +5,12 @@ import useMovieTrailer from "../hooks/useMovieTrailer";
 const VideoBackgroud = ({ movieId }) => {
   const trailerVideo = useSelector(store => store.movies?.trailerVideo);
  
+   // ✅ Hook to fetch trailer
   useMovieTrailer(movieId);
+
+  // ✅ Safe: if trailer not ready, render null
+  if (!trailerVideo?.key) return null;
+
 
   return (
     <div className="absolute inset-0 overflow-hidden">

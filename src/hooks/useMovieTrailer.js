@@ -3,37 +3,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "../utils/moviesSlice";
 
-
 const useMovieTrailer = (movieId) => {
-     const dispatch = useDispatch();
-    const trailerVideo = useSelector(store=> store.movies.trailerVideo);
+  const dispatch = useDispatch();
+  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
 
-  // fetch trailer video & updating the store with trailor video data 
- useEffect(() => {
-  if (trailerVideo) return;
+  useEffect(() => {
+    if (!movieId) return; // safeguard
+    if (trailerVideo) return;
 
-  const getMovieVideos = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/" +
-        movieId +
-        "/videos?language=en-US",
-      API_OPTIONS
-    );
+    const getMovieVideos = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+          API_OPTIONS
+        );
 
-    const json = await data.json();
+        if (!response.ok) {
+          console.error("Failed to fetch movie videos", response.status);
+          return;
+        }
 
-    const filterData = json.results.filter(
-      (video) => video.type === "Trailer"
-    );
-    const trailer = filterData.length ? filterData[0] : json.results[0];
+        const json = await response.json();
 
-    dispatch(addTrailerVideo(trailer));
-  };
+        if (!json.results || json.results.length === 0) {
+          console.warn("No videos found for this movie:", movieId);
+          return;
+        }
 
-  getMovieVideos();
-}, [movieId, trailerVideo, dispatch]);
+        // Get the first trailer, fallback to first video
+        const filterData = json.results.filter((video) => video.type === "Trailer");
+        const trailer = filterData.length ? filterData[0] : json.results[0];
 
-  
-}
+        dispatch(addTrailerVideo(trailer));
+      } catch (err) {
+        console.error("Error fetching movie videos:", err);
+      }
+    };
 
-export default useMovieTrailer
+    getMovieVideos();
+  }, [movieId, trailerVideo, dispatch]);
+};
+
+export default useMovieTrailer;
