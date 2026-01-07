@@ -14,7 +14,7 @@ console.log(mainMovie);
 const {original_title, overview, id } = mainMovie;
 
   return (
-  <div className="relative w-full h-[65vh] sm:h-[70vh] lg:h-[90vh] overflow-hidden">
+  <div className="relative w-full h-[70vh] sm:h-[85vh] lg:h-[95vh] overflow-hidden">
     
     <VideoBackgroud movieId={id} />
 

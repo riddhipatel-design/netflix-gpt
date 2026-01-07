@@ -34,7 +34,14 @@
 - usePopoularMovies, nowPlaying, topRated, Upcomming Custome hooks
 - GPT Search features
 - Multi-language feature in App
-- Integrate GPT APIs
+- Integrate GPT Open AI API key
+- Gpt Search API call
+- Fetched GPT movie suggestion from TMDB 
+- Created gptSlice added data
+- Reused Movie List componenet to make movie suggestion container
+- Memoization
+- Added .env file and added to gitignore
+- made responsive 
 
 
 #Features

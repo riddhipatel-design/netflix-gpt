@@ -10,7 +10,7 @@ const SecondaryContainer = () => {
         <div className=" bg-black">
     
       {/* Rows pulled into hero */}
-      <div className="relative -mt-52 z-20">
+      <div className="relative -mt-24 sm:-mt-40 z-20">
           <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
           <MovieList title={"Popular"} movies={movies.popularMovies} />
           <MovieList title={"Top Rated"} movies={movies.topRatedMovies} />

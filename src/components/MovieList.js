@@ -5,12 +5,12 @@ const MovieList = ({ title, movies }) => {
   if (!movies) return null;
 
   return (
-    <div className="px-6"> 
+    <div className="px-7"> 
         <h1 className="text-white text-2xl font-bold py-4 ">{title}</h1>
 
     <div className="flex overflow-x-auto scrollbar-hide scroll-smooth">
      
-      <div className="flex gap-4 min-w-max snap-x snap-mandatory">
+      <div className="flex gap-4 min-w-max">
         {movies.map((movie) => (
           <MovieCard
             key={movie.id}

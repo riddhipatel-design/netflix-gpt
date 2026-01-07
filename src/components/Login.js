@@ -93,16 +93,26 @@ const Login = () => {
           alt="background"
           className="w-full h-screen object-cover"
         />
-
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
         {/* Login form */}
-        <div className="w-full max-w-[480px]">
+        <div className="w-full">
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-6 bg-black/75 py-14 px-16 rounded text-white"
+            className="
+      absolute top-1/2 left-1/2
+      -translate-x-1/2 -translate-y-1/2
+      flex flex-col gap-6
+      bg-black/75
+      py-10 px-8 sm:py-14 sm:px-16
+      rounded text-white
+     w-[80%] sm:w-[70%] md:w-[65%] lg:w-[45%] xl:w-[35%]
+    "
           >
             <h1 className="font-bold text-3xl pb-4">
               {isSignInForm ? lang[langKey].signIn : lang[langKey].signUp}
             </h1>
+
             {!isSignInForm && (
               <input
                 ref={name}
@@ -131,6 +141,7 @@ const Login = () => {
                 {errorMessage}
               </p>
             )}
+
             <button
               type="submit"
               className="p-3 bg-red-700 text-white font-semibold rounded w-full"
@@ -138,7 +149,8 @@ const Login = () => {
             >
               {isSignInForm ? lang[langKey].signIn : lang[langKey].signUp}
             </button>
-            <p className="py-4 text-gray-300">
+
+            <p className="py-4 text-gray-300 text-sm sm:text-base">
               {isSignInForm ? (
                 <>
                   {lang[langKey].newToNetflix}{" "}
