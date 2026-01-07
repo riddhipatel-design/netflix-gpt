@@ -68,9 +68,9 @@ const Login = () => {
         email.current.value.trim(),
         password.current.value.trim()
       )
-        .then((userCredential) => {
+        .then(() => {
           // Signed in
-          const user = userCredential.user;
+         
         })
         .catch((error) => {
           setErrorMessage(getFirebaseAuthErrorMessage(error.code, true));
