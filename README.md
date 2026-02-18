@@ -1,6 +1,6 @@
 # FlixGPT
 
-FlixGPT is a Netflix-inspired movie web app created for learning purposes. 
+FlixGPT is a Netflix-inspired movie web app. 
 
 ## Features
 - Browse movies: Now Playing, Popular, Top Rated, Upcoming
